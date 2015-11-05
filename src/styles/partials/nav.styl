@@ -1,0 +1,24 @@
+nav {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 20px;
+  #link-list {
+    ul {
+      list-style-type: none;
+      li {
+        display: inline-block;
+        margin: 0 15px;
+        a {
+          color: lighten(#551A8B, 30%);
+        }
+      }
+      li:first-child {
+        display: none;
+      }
+      li:last-child {
+        margin-right: 2px;
+      }
+    }
+  }
+}
