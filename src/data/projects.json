@@ -10,7 +10,7 @@
     ],
     "used": "Laravel, Gulp, LESS, ReactJS",
     "images": [
-      "snibbles-full.png"
+      "snibbles-full"
     ]
   },
   {
@@ -24,7 +24,7 @@
     ],
     "used": "HTML, CSS, jQuery",
     "images": [
-      "whities-full.png"
+      "whities-full"
     ]
   },
   {
@@ -37,7 +37,7 @@
     ],
     "used": "AmpersandJS, ReactJS, Stylus, webpack",
     "images": [
-      "whities-update-full.png"
+      "whities-update-full"
     ]
   },
   {
@@ -52,7 +52,7 @@
     ],
     "used": "PHP, HTML, CSS, jQuery",
     "images": [
-      "whities-calendar.png"
+      "whities-calendar"
     ]
   }
 ]

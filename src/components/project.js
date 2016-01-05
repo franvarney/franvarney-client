@@ -1,5 +1,7 @@
 import React from 'react';
 
+import ProjectImages from '../assets/images/projects';
+
 let Project = React.createClass({
   enlargeImg (event) {
     let imgSrc = event.target.src;
@@ -28,7 +30,7 @@ let Project = React.createClass({
         <div id="images">
           <ul>
             { images.map(function (image, index) {
-              return <li onClick={ self.enlargeImg } className="image" key={ index }><img src={ "/img/" + image } /></li>;
+              return <li onClick={ self.enlargeImg } className="image" key={ index }><img src={ ProjectImages[image] } /></li>;
             })}
           </ul>
         </div>
