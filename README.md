@@ -5,7 +5,7 @@ franvarney
 `npm install`
 
 ## Run (development)
-`npm start`
+`npm run dev`
 
 ## Build
-`npm run build`
+`npm start`
