@@ -4,8 +4,9 @@
   "description": "franvarney.com - Personal site for Francesca Varney",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dev-server --progress --hot",
-    "start": "NODE_ENV=production webpack --progress"
+    "clean": "rm -rf public",
+    "dev": "npm run clean && NODE_ENV=development webpack-dev-server --progress --hot",
+    "start": "npm run clean && NODE_ENV=production webpack --progress"
   },
   "repository": {
     "type": "git",
