@@ -1,16 +1,16 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const Path = require('path');
-const Webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const Path = require('path')
+const Webpack = require('webpack')
 
-const ROOT_PATH = Path.resolve(__dirname);
+const ROOT_PATH = Path.resolve(__dirname)
 
 function getEntrySources(sources) {
   if (process.env.NODE_ENV !== 'production') {
-    sources.push('webpack-hot-middleware/client');
+    sources.push('webpack-hot-middleware/client')
   }
 
-  return sources;
+  return sources
 }
 
 var basePlugins = [
@@ -23,12 +23,12 @@ var basePlugins = [
     inject: 'body',
   }),
   new ExtractTextPlugin('css/styles.css')
-];
+]
 
 var devPlugins = [
   new Webpack.HotModuleReplacementPlugin(),
   new Webpack.NoErrorsPlugin(),
-];
+]
 
 var prodPlugins = [
   new Webpack.optimize.OccurenceOrderPlugin(),
@@ -37,21 +37,21 @@ var prodPlugins = [
       warnings: false,
     },
   })
-];
+]
 
 const PLUGINS = basePlugins
   .concat(process.env.NODE_ENV === 'production' ? prodPlugins : [])
-  .concat(process.env.NODE_ENV === 'development' ? devPlugins : []);
+  .concat(process.env.NODE_ENV === 'development' ? devPlugins : [])
 
 module.exports = {
   entry: {
-    app: getEntrySources(['./src/app'])
+    app: getEntrySources(['./src/Routes'])
   },
   output: {
     path: Path.resolve(ROOT_PATH, 'public'),
-    filename: 'js/[name].[hash].js',
+    filename: 'js/app.[hash].js',
     publicPath: '/',
-    sourceMapFilename: 'js/[name].[hash].js.map',
+    sourceMapFilename: 'js/app.[hash].js.map',
     chunkFilename: '[id].chunk.js',
   },
   devtool: 'source-map',
@@ -61,9 +61,16 @@ module.exports = {
       { test: /\.js$/, loader: 'source-map-loader' }
     ],
     loaders: [
-      { test: /\.js$/, loaders: ['react-hot', 'babel-loader?stage=0'], exclude: /node_modules/ },
+      { test: /\.js$/,
+        loader: 'babel',
+        exclude: /node_modules/,
+        query: {
+          cacheDirectory: true,
+          presets: ['es2015', 'react']
+        }
+      },
       { test: /\.(png|jpg|jpeg|gif|svg)$/, loader: 'file?name=img/[name].[ext]' },
       { test: /\.styl$/, loader: ExtractTextPlugin.extract('style', 'css!stylus') }
     ]
   }
-};
+}
