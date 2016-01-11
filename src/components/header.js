@@ -1,16 +1,15 @@
-import React from 'react';
+import React, {createClass} from 'react'
 
-import Navigation from './navigation';
+import Logo from '../assets/fv.png'
 
-let Header = React.createClass({
+let Header = createClass({
   render() {
     return (
-      <div id="header">
-        <h1>Fran Varney</h1>
-        <Navigation />
-      </div>
-    );
+      <header>
+        <img src={Logo} />
+      </header>
+    )
   }
-});
+})
 
-export default Header;
+export default Header

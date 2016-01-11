@@ -1,36 +1,26 @@
 html, body {
-  position: relative;
-  height: 100%;
+  position: relative
+  height: 100%
 }
 
 body {
-  width: 1024px;
-  margin: 0 auto;
+  margin: 0 auto
 }
 
-.wrap {
-  margin-bottom: 50px;
-  position: relative;
+#root, #root div {
+  height: 100%
+  position: relative
 }
 
-#modal {
-  display: none;
-  max-height: calc(100% - 100px);
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 1024px;
-  transform: translate(-50%, -50%);
-  #modal-image {
-    position: relative;
-    display: block;
-    height: 100%;
-    width: 100%;
-  }
-  #modal-text {
-    background-color: lighten(#551A8B, 70%);
-    float: right;
-    padding: 15px;
-    margin-top: 2px;
-  }
+.col {
+  float: left
+  height: 100%
+}
+
+.one-fourth-col {
+  width: 25%
+}
+
+.three-fourth-col {
+  width: 75%
 }
