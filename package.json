@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "rm -rf public",
     "dev": "npm run clean && NODE_ENV=development webpack-dev-server --progress --hot",
+    "postinstall": "cp src/config/example.js src/config/production.js && cp src/config/example.js src/config/development.js",
     "start": "npm run clean && NODE_ENV=production webpack --progress"
   },
   "repository": {
@@ -32,6 +33,7 @@
     "html-webpack-plugin": "1.6.2",
     "json-loader": "0.5.2",
     "react": "0.14.6",
+    "react-d3": "0.4.0",
     "react-dom": "0.14.6",
     "react-hot-loader": "1.3.0",
     "react-router": "1.0.3",
