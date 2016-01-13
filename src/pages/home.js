@@ -1,6 +1,7 @@
 import React, {createClass} from 'react'
 import {RouteHandler} from 'react-router'
 
+import GithubActivities from '../components/GithubActivities/Container'
 import Header from '../components/header'
 
 let Home = createClass({
@@ -11,7 +12,7 @@ let Home = createClass({
           <Header />
         </section>
         <section className="three-fourth-col col">
-
+          <GithubActivities />
         </section>
       </div>
     )
