@@ -15,7 +15,7 @@ function getEntrySources(sources) {
 
 var basePlugins = [
   new Webpack.DefinePlugin({
-    __DEV__: process.env.NODE_ENV !== 'production',
+    __DEVELOPMENT__: process.env.NODE_ENV !== 'production',
     __PRODUCTION__: process.env.NODE_ENV === 'production',
   }),
   new HtmlWebpackPlugin({
