@@ -33,7 +33,7 @@ let GithubActivityContainer = createClass({
   componentDidMount() {
     this.getActivities()
 
-    this.state.width = document.getElementsByClassName('github-activity-container')[0].offsetWidth
+    this.state.width = document.getElementsByClassName('github-activity-container')[0].offsetWidth - 70
     this.setState(this.state)
   },
 
