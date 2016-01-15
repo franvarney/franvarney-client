@@ -1,12 +1,13 @@
 import React, {createClass} from 'react'
+import {Link} from 'react-router'
 
-import Logo from '../assets/fv.png'
+import Logo from '../assets/fv-logo-final.svg'
 
 let Header = createClass({
   render() {
     return (
       <header>
-        <img src={Logo} />
+        <Link to="/"><img src={Logo} /></Link>
       </header>
     )
   }
