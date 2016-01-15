@@ -69,6 +69,7 @@ module.exports = {
           presets: ['es2015', 'react']
         }
       },
+      { test: /\.json$/, loader: 'json' },
       { test: /\.(png|jpg|jpeg|gif|svg)$/, loader: 'file?name=img/[name].[ext]' },
       { test: /\.styl$/, loader: ExtractTextPlugin.extract('style', 'css!stylus') }
     ]
