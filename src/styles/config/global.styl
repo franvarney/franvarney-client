@@ -11,7 +11,9 @@ body {
   margin: 0 auto
 }
 
-#root, #root div {
+#root,
+#root > div,
+#root > div > .page {
   height: 100%
   position: relative
 }
@@ -19,22 +21,51 @@ body {
 .col {
   float: left
   height: 100%
-  padding: $padding
 }
 
 .one-fourth-col {
+  background-color: $lightBackground
+  padding: $padding
   width: 25%
 }
 
 .three-fourth-col {
+  background-color: $white
+  max-height: 100%;
+  overflow-y: scroll;
   width: 75%
 }
 
 h1, h2, h3, h4, h5 {
   margin: 0
-  padding: 0 0 15px 0
 }
 
 h2 {
+  color: $darkText
+  font-size: 32px
+  line-height: 32px
+  padding: 0 0 15px 0
   text-transform: uppercase
+}
+
+h4 {
+  font-size: 20px
+  padding: 0 0 5px 0
+}
+
+p, span, a {
+  font-size: 16px
+  line-height: 20px
+}
+
+img {
+  display: inline-block
+  height: auto
+  margin: 35px 0 0
+  position: relative
+  width: 100%
+}
+
+img.half {
+  width: 50%
 }
