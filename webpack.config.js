@@ -20,7 +20,7 @@ var basePlugins = [
   }),
   new HtmlWebpackPlugin({
     template: './src/templates/index.html',
-    inject: 'body',
+    inject: 'body'
   }),
   new ExtractTextPlugin('css/styles.css')
 ]
@@ -70,6 +70,7 @@ module.exports = {
         }
       },
       { test: /\.json$/, loader: 'json' },
+      { test: /\.(ico)$/, loader: 'file?name=[name].[ext]' },
       { test: /\.(png|jpg|jpeg|gif|svg)$/, loader: 'file?name=img/[name].[ext]' },
       { test: /\.styl$/, loader: ExtractTextPlugin.extract('style', 'css!stylus') }
     ]
