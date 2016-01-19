@@ -14,7 +14,7 @@ let BlogSnippetPost = createClass({
     return (
       <div className="markdown-container container">
         <h4>{title}</h4>
-        <div dangerouslySetInnerHTML={{__html: summary}}></div>
+        <div dangerouslySetInnerHTML={{ __html: summary }}></div>
       </div>
     )
   }

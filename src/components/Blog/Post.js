@@ -18,8 +18,8 @@ let BlogPost = createClass({
     return (
       <div className="blog-post-container container">
         {header}
-        <h5><q>{caption}</q></h5>
-        <ReactMarkdown source={content} />
+        {caption ? (<h5><q>caption</q></h5>) : null }
+        <ReactMarkdown source={content || 'Loading...' } />
       </div>
     )
   }
