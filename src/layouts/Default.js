@@ -1,6 +1,7 @@
 import React, {createClass} from 'react'
 
 import Header from '../components/header'
+import SocialIcons from '../components/Layout/SocialIcons.js'
 
 let DefaultLayout = createClass({
   render() {
@@ -8,6 +9,7 @@ let DefaultLayout = createClass({
       <div className={`${this.props.classes} page`}>
         <section className="one-fourth-col col">
           <Header />
+          <SocialIcons />
         </section>
         <section className="three-fourth-col col">
           {this.props.children}
