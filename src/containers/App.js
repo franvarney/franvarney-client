@@ -1,12 +1,13 @@
 import React, {createClass} from 'react'
-import {RouteHandler} from 'react-router'
 
 import '../assets/favicon.ico'
 
 let App = createClass({
   render() {
     return (
-      <div>{this.props.children}</div>
+      <div>
+        {this.props.children}
+      </div>
     )
   }
 })
