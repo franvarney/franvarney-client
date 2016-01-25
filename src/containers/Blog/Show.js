@@ -15,7 +15,7 @@ let BlogShow = createClass({
 
   getPost() {
     Request
-      .get(`${Config.api.url}/posts/${this.state.slug}?auth_token=${Config.api.token}`)
+      .get(`${Config.api.url}/posts/${this.state.slug}`)
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         if (err) console.log(err)

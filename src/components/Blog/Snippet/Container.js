@@ -15,7 +15,7 @@ let BlogSnippetContainer = createClass({
 
   getLatestPost() {
     Request
-      .get(`${Config.api.url}/posts?auth_token=${Config.api.token}&latest=true`)
+      .get(`${Config.api.url}/posts?latest=true`)
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         if (err) console.log(err)

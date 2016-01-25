@@ -14,7 +14,7 @@ let BlogAll = createClass({
 
   getPosts() {
     Request
-      .get(`${Config.api.url}/posts?auth_token=${Config.api.token}`)
+      .get(`${Config.api.url}/posts`)
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         if (err) console.log(err)

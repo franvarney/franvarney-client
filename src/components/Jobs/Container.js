@@ -13,8 +13,8 @@ let JobContainer = createClass({
   },
 
   getPosts(isPresent) {
-    let url = `${Config.api.url}/jobs?auth_token=${Config.api.token}`
-    if (isPresent) url = `${url}&present=true`
+    let url = `${Config.api.url}/jobs`
+    if (isPresent) url = `${url}?present=true`
 
     Request
       .get(url)

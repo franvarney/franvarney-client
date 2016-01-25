@@ -19,7 +19,7 @@ let GithubActivityContainer = createClass({
 
   getActivities() {
     Request
-      .get(`${Config.api.url}/github/activities?auth_token=${Config.api.token}`)
+      .get(`${Config.api.url}/github/activities`)
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         if (err) console.log(err)
