@@ -1,5 +1,4 @@
 import React, {createClass} from 'react'
-import {RouteHandler} from 'react-router'
 
 import AboutMe from '../components/AboutMe'
 import BlogSnippet from '../components/Blog/Snippet/Container'
