@@ -8,6 +8,7 @@ import Blogs from './containers/Blog/All'
 import BlogShow from './containers/Blog/Show'
 import CSS from './styles/index.styl'
 import Home from './containers/Home'
+import Resume from './containers/Resume'
 
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 
@@ -17,6 +18,7 @@ let routes = (
       <IndexRoute component={Home} />
       <Route path="blog" component={Blogs} />
       <Route path="blog/:slug" component={BlogShow} />
+      <Route path="resume" component={Resume} />
     </Route>
   </Router>
 )
