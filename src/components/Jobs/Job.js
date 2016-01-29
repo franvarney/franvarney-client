@@ -21,12 +21,12 @@ let Job = createClass({
   },
 
   render() {
-    let {employer, dates, location, tasks, title} = this.props.job
+    const {employer, dates, location, tasks, title} = this.props.job
 
     return (
       <div className="job-container container">
-        <h3>{employer}</h3> - <em>{this.formatDate(dates.start)} to {this.formatDate(dates.end)}</em>
-        <p className="title">{title} in {location.city}, {location.state}</p>
+        <h3>{employer}</h3>, <em>{this.formatDate(dates.start)} to {this.formatDate(dates.end)}</em>
+        <p className="title">{title}</p>
         <div>
           <ul>
             { tasks.map((task, index) => {
