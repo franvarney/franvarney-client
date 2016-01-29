@@ -1,7 +1,7 @@
 import React, {createClass} from 'react'
 
-import Header from '../components/header'
-import SocialIcons from '../components/Layout/SocialIcons.js'
+import Header from '../components/Layout/Header'
+import SocialIcons from '../components/Layout/SocialIcons'
 
 let DefaultLayout = createClass({
   render() {
