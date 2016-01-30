@@ -1,6 +1,6 @@
 server {
   listen 8080;
-  server_name dev.franvarney.com;
+  server_name franvarney.com;
 
   root /mnt/app;
   index index.html index.htm;
