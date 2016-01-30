@@ -1,4 +1,4 @@
-import {createHashHistory} from 'history'
+import {createHistory} from 'history'
 import React from 'react'
 import {render} from 'react-dom'
 import {IndexRoute, Route, Router, useRouterHistory} from 'react-router'
@@ -10,10 +10,8 @@ import CSS from './styles/index.styl'
 import Home from './containers/Home'
 import Resume from './containers/Resume'
 
-const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
-
 let routes = (
-  <Router history={appHistory}>
+  <Router history={createHistory()}>
     <Route path='/' component={App}>
       <IndexRoute component={Home} />
       <Route path="blog" component={Blogs} />
