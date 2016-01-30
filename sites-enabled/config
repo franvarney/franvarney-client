@@ -1,0 +1,11 @@
+server {
+  listen 8080;
+  server_name dev.franvarney.com;
+
+  root /mnt/app;
+  index index.html index.htm;
+
+  location / {
+    try_files $uri /index.html;
+  }
+}
