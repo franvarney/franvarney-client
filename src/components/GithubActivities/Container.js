@@ -40,8 +40,7 @@ let GithubActivityContainer = createClass({
   render() {
     return (
       <div className="github-activity-container container">
-        <h2>Activity</h2>
-        <p>Includes commits, issues, and pull requests from GitHub.</p>
+        <h2>Github Activity</h2>
         <GithubActivityGraph activities={this.state.activities} width={this.state.width} />
       </div>
     )

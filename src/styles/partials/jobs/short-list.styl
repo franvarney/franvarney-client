@@ -8,11 +8,10 @@
     list-style-type: none
 
     li {
-      font-size: 12px
       margin-top: 5px
 
       &:before {
-        content: '\25CA'
+        content: '\2022'
         margin-right: 5px
       }
     }
@@ -20,5 +19,18 @@
 
   h3 {
     display: inline-block
+    color: $darkText
+  }
+
+  h5 {
+    color: $darkText
+  }
+
+  .date {
+    margin-top: 0
+
+    span {
+      font-size: 14px
+    }
   }
 }

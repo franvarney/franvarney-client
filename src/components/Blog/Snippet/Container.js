@@ -26,19 +26,6 @@ let BlogSnippetContainer = createClass({
       })
   },
 
-  formatDate(date) {
-    if (date === 'Present') return date
-
-    const monthNames =['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
-      'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
-
-    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
-      'Thursday', 'Friday', 'Saturday']
-
-    date = new Date(date)
-    return `${dayNames[date.getDay()]} ${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
-  },
-
   componentDidMount() {
     this.getLatestPost()
   },
@@ -49,7 +36,6 @@ let BlogSnippetContainer = createClass({
     return (
       <div className="blog-snippet-container container">
         <h2>Writings</h2>
-        <em>Posted on {this.formatDate(post.createdAt)}</em>
         <BlogSnippetPost post={post} />
         <div className="link-button-container container">
           <LinkButton path={`/blog/${post.slug}`} text="Read More" />

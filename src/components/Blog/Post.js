@@ -9,8 +9,21 @@ let BlogPost = createClass({
     }
   },
 
+  formatDate(date) {
+    if (date === 'Present') return date
+
+    const monthNames =['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
+      'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+
+    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
+      'Thursday', 'Friday', 'Saturday']
+
+    date = new Date(date)
+    return `${dayNames[date.getDay()]} ${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+  },
+
   render() {
-    let {caption, content, slug, title} = this.props.post
+    let {content, createdAt, slug, title} = this.props.post
     let header = (<h2>{title}</h2>)
 
     if (!this.props.hasComments) header = (<Link to={`/blog/${slug}`}><h2>{title}</h2></Link>)
@@ -18,7 +31,7 @@ let BlogPost = createClass({
     return (
       <div className="blog-post-container container">
         {header}
-        {caption ? (<h5><q>caption</q></h5>) : null }
+        <p className="date"><em>Posted on {this.formatDate(createdAt)}</em></p>
         <ReactMarkdown source={content || 'Loading...' } />
       </div>
     )
