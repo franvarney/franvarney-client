@@ -2,10 +2,10 @@ import React, {createClass} from 'react'
 import {Link} from 'react-router'
 
 import Config from '../../config'
-import Facebook from '../../assets/icons/facebook.png'
-import Github from '../../assets/icons/github.png'
-import Linkedin from '../../assets/icons/linkedin.png'
-import Twitter from '../../assets/icons/twitter.png'
+import Facebook from '../../assets/icons/facebook.svg'
+import Github from '../../assets/icons/github.svg'
+import Linkedin from '../../assets/icons/linkedin.svg'
+import Twitter from '../../assets/icons/twitter.svg'
 
 let SocialIcons = createClass({
   render() {
