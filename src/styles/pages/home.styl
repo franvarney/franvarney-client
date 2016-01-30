@@ -1,0 +1,50 @@
+.page-home {
+  .about-me-container {
+    background-color: $darkBackground
+    color: $lightText
+    display: inline-block
+    float: left
+    height: 100%
+    padding: $padding
+    width: 50%
+
+    h2 {
+      color: $lightText
+    }
+  }
+
+  .wrap-container {
+    display: block
+    height: 315px
+    position: relative
+    width: 100%
+
+    .image-container {
+      display: inline-block
+      float: left
+      height: 100%
+      width: 50%
+
+      > div {
+        background-position-y: 80%
+        background-repeat: no-repeat
+        background-size: 100% auto
+        display: block
+        height: 100%
+      }
+    }
+  }
+
+  .wrap-container:last-child {
+    height: 459px
+
+    .link-button-container {
+      margin-top: $padding
+      text-align: right
+
+      a {
+        color: $darkBackground
+      }
+    }
+  }
+}

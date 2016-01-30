@@ -1,36 +1,117 @@
+* {
+  box-sizing: border-box
+}
+
 html, body {
-  position: relative;
-  height: 100%;
+  position: relative
+  height: 100%
 }
 
 body {
-  width: 1024px;
-  margin: 0 auto;
+  margin: 0 auto
 }
 
-.wrap {
-  margin-bottom: 50px;
-  position: relative;
+#root,
+#root > div,
+#root > div > .page {
+  height: 100%
+  position: relative
 }
 
-#modal {
-  display: none;
-  max-height: calc(100% - 100px);
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 1024px;
-  transform: translate(-50%, -50%);
-  #modal-image {
-    position: relative;
-    display: block;
-    height: 100%;
-    width: 100%;
+.col {
+  float: left
+  height: 100%
+  position: relative
+}
+
+.one-fourth-col {
+  background-color: $lightBackground
+  padding: $padding
+  width: 25%
+}
+
+.three-fourth-col {
+  background-color: $white
+  max-height: 100%
+  overflow-y: scroll
+  width: 75%
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 0
+}
+
+h2 {
+  color: $darkText
+  font-size: 32px
+  line-height: 32px
+  padding: 0 0 15px 0
+  text-transform: uppercase
+}
+
+h4 {
+  font-size: 20px
+  padding: 0 0 5px 0
+}
+
+h5 {
+  font-size: 14px
+}
+
+p, span, a {
+  font-size: 16px
+  line-height: 24px
+}
+
+a {
+  color: $linkText
+  font-weight: 500
+}
+
+span.link-button {
+  height: 50px
+  margin-left: 10px
+  padding: 10px
+  width: auto
+
+  a {
+    color: $lightBackground
   }
-  #modal-text {
-    background-color: lighten(#551A8B, 70%);
-    float: right;
-    padding: 15px;
-    margin-top: 2px;
-  }
+}
+
+img {
+  display: inline-block
+  height: auto
+  margin: 35px 0 0
+  position: relative
+  width: 100%
+}
+
+img.half {
+  width: 50%
+}
+
+ul, li {
+  -webkit-margin-before: 0
+  -webkit-margin-after: 0
+  -webkit-margin-start: 0
+  -webkit-margin-end: 0
+  -webkit-padding-start: 0
+}
+
+pre {
+  background-color: $codeBackground
+  padding: 15px
+  word-wrap: break-word
+  width: 100%
+}
+
+code {
+  background-color: $codeBackground
+  color: lighten($darkText, 10%)
+  font-size: 14px
+}
+
+p > code {
+  padding: 2px 5px
 }
