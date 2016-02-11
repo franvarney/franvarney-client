@@ -20,7 +20,7 @@ let BlogAll = createClass({
         if (err) console.log(err)
 
         this.setState({
-          posts: JSON.parse(res.text)
+          posts: res.body
         })
       })
   },

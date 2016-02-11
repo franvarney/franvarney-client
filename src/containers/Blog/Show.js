@@ -21,7 +21,7 @@ let BlogShow = createClass({
         if (err) console.log(err)
 
         this.setState({
-          post: JSON.parse(res.text)
+          post: res.body
         })
       })
   },
