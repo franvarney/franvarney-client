@@ -12,10 +12,10 @@ let SocialIcons = createClass({
     return (
       <div className="social-container container">
         <ul>
-          <li><a href={Config.social.github}><img src={Github} /></a></li>
-          <li><a href={Config.social.linkedin}><img src={Linkedin} /></a></li>
-          <li><a href={Config.social.twitter}><img src={Twitter} /></a></li>
-          <li><a href={Config.social.facebook}><img src={Facebook} /></a></li>
+          <li><a href={Config.social.github} target="_blank"><img src={Github} /></a></li>
+          <li><a href={Config.social.linkedin} target="_blank"><img src={Linkedin} /></a></li>
+          <li><a href={Config.social.twitter} target="_blank"><img src={Twitter} /></a></li>
+          <li><a href={Config.social.facebook} target="_blank"><img src={Facebook} /></a></li>
         </ul>
       </div>
     )
