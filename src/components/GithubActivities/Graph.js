@@ -21,7 +21,7 @@ let GithubActivityGraph = createClass({
         height={175}
         xAxisLabel="Day"
         yAxisLabel="Activities"
-        xAxisTickInterval={{ unit: "weeks", interval: 2 }}
+        xAxisTickInterval={{ unit: "weeks", interval: 4 }}
         xAccessor={(d) => new Date(d[0])}
         yAccessor={(d) => d[1]} />
     )
