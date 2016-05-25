@@ -1,5 +1,7 @@
 import React, {createClass, PropTypes} from 'react'
 
+import Constants from '../../constants'
+
 let Job = createClass({
   getDefaultPropTypes() {
     return {
@@ -11,10 +13,8 @@ let Job = createClass({
   },
 
   formatDate(date) {
+    let {monthNames} = Constants
     if (date === 'Present') return date
-
-    let monthNames =['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
-      'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
 
     date = new Date(date)
     return `${monthNames[date.getMonth()]} ${date.getFullYear()}`

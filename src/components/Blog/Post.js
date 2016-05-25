@@ -3,24 +3,13 @@ import ReactDisqusThread from 'react-disqus-thread'
 import ReactMarkdown from 'react-markdown'
 import {Link} from 'react-router'
 
+import FormatDate from '../../utils/format-date'
+
 let BlogPost = createClass({
   getInitialState() {
     return {
       post: {}
     }
-  },
-
-  formatDate(date) {
-    if (date === 'Present') return date
-
-    const monthNames =['January', 'February', 'March', 'April', 'May', 'June', 'July',
-      'August', 'September', 'October', 'November', 'December']
-
-    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
-      'Thursday', 'Friday', 'Saturday']
-
-    date = new Date(date)
-    return `${dayNames[date.getDay()]}, ${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
   },
 
   render() {
@@ -36,7 +25,7 @@ let BlogPost = createClass({
     return (
       <div className="blog-post-container container">
         {header}
-        <p className="date"><em>Posted on {this.formatDate(createdAt)}</em></p>
+        <p className="date"><em>Posted on {FormatDate(createdAt)}</em></p>
         <ReactMarkdown source={content || 'Loading...' } />
         {comments}
       </div>
