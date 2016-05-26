@@ -15,6 +15,7 @@ let GithubActivityContainer = createClass({
   },
 
   render() {
+    console.log(this.props.activities)
     return (
       <div className="github-activity-container container">
         <h2>Github Activity</h2>

@@ -14,7 +14,8 @@ import Ducky from '../assets/images/ducky.jpg'
 let Home = createClass({
   getInitialState() {
     return {
-      activities: []
+      activities: [],
+      jobs: []
     }
   },
 
@@ -31,14 +32,28 @@ let Home = createClass({
       .end((err, res) => {
         if (err) console.log(err)
 
-        this.setState({
-          activities: this.formatActivities(JSON.parse(res.text))
-        })
+        this.state.activities = this.formatActivities(JSON.parse(res.text))
+        this.setState(this.state)
+      })
+  },
+
+  getJobs() {
+    let url = `${Config.api.url}/jobs?present=true`
+
+    Request
+      .get(url)
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        if (err) console.log(err)
+
+        this.state.jobs = JSON.parse(res.text)
+        this.setState(this.state)
       })
   },
 
   componentDidMount() {
     this.getActivities()
+    this.getJobs()
   },
 
   render() {
@@ -51,7 +66,7 @@ let Home = createClass({
         <GithubActivities activities={this.state.activities} />
         <BlogSnippet />
         <div className="wrap-container container">
-          <Experience isPresent={true} />
+          <Experience jobs={this.state.jobs} />
           <ImageBlock img={Lilac} />
         </div>
       </DefaultLayout>
