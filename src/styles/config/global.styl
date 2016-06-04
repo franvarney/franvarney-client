@@ -68,17 +68,6 @@ a {
   font-weight: 500
 }
 
-span.link-button {
-  height: 50px
-  margin-left: 10px
-  padding: 10px
-  width: auto
-
-  a {
-    color: $lightBackground
-  }
-}
-
 img {
   display: inline-block
   height: auto
@@ -114,4 +103,30 @@ code {
 
 p > code {
   padding: 2px 5px
+}
+
+span.link-button {
+  height: 50px
+  margin-left: 10px
+  padding: 10px
+  width: auto
+
+  a {
+    color: $lightBackground
+  }
+}
+
+.link-button.dark {
+  background-color: $darkBackground
+  bottom: $padding
+  cursor: pointer
+  display: inline-block
+  height: 50px
+  text-align: center
+  width: 200px
+
+  a {
+    color: $lightText
+    line-height: 28px
+  }
 }
