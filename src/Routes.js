@@ -6,6 +6,7 @@ import {IndexRoute, Route, Router, useRouterHistory} from 'react-router'
 import App from './containers/App'
 import Blogs from './containers/Blog/All'
 import BlogShow from './containers/Blog/Show'
+import Checkin from './containers/Checkin'
 import CSS from './styles/index.styl'
 import Home from './containers/Home'
 import Resume from './containers/Resume'
@@ -17,6 +18,7 @@ let routes = (
       <Route path="blog" component={Blogs} />
       <Route path="blog/:slug" component={BlogShow} />
       <Route path="resume" component={Resume} />
+      <Route path="checkin" component={Checkin} />
     </Route>
   </Router>
 )
