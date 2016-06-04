@@ -7,8 +7,6 @@ import LinkButton from '../Layout/LinkButton'
 
 let JobContainer = createClass({
   render() {
-    console.log('1')
-
     if (this.props.jobs.length === 1) {
       return (
         <div className="jobs-container container">
