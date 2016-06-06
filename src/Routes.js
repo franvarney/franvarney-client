@@ -9,6 +9,7 @@ import BlogShow from './containers/Blog/Show'
 import Checkin from './containers/Checkin'
 import CSS from './styles/index.styl'
 import Home from './containers/Home'
+import GoogleMap from './containers/Map'
 import Resume from './containers/Resume'
 
 let routes = (
@@ -19,6 +20,7 @@ let routes = (
       <Route path="blog/:slug" component={BlogShow} />
       <Route path="resume" component={Resume} />
       <Route path="checkin" component={Checkin} />
+      <Route path="map" component={GoogleMap} />
     </Route>
   </Router>
 )
