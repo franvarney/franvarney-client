@@ -70,7 +70,6 @@ let SubmitPlace = createClass({
   },
 
   render() {
-    console.log(this)
     const {location, name, placeId} = this.props.place
 
     let place = null
