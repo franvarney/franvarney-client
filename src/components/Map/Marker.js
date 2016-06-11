@@ -1,12 +1,10 @@
 import React, {createClass, PropTypes} from 'react'
 import shouldPureComponentUpdate from 'react-pure-render/function'
 
-const MARKER_WIDTH = 5
-const MARKER_HEIGHT = 5
+const MARKER_WIDTH = 6
+const MARKER_HEIGHT = 6
 
 const markerStyle = {
-  // initially any map object has left top corner at lat lng coordinates
-  // it's on you to set object origin to 0,0 coordinates
   backgroundColor: '#895584',
   border: '3px solid #FFF',
   color: '#FFF',
@@ -26,15 +24,17 @@ let Marker = createClass({
     lng: PropTypes.number.isRequired
   },
 
-  shouldComponentUpdate() {
+  shouldComponentUpdate(nextProps, nextState) {
     return shouldPureComponentUpdate
   },
 
   render() {
     return (
-      <div className="marker" style={markerStyle}>
-        {this.props.text}
-      </div>
+      <div
+        style={markerStyle}
+        data-visitor={JSON.stringify(this.props.visitor)}
+        data-place={JSON.stringify(this.props.place)}
+        onClick={this.props.showMarkerDetail} />
     )
   }
 })
