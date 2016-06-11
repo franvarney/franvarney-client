@@ -1,13 +1,14 @@
+import GoogleMapReact from 'google-map-react'
 import React, {createClass} from 'react'
 import Request from 'superagent'
 
 import Config from '../config'
 import DefaultLayout from '../layouts/Default'
-import GoogleMapReact from 'google-map-react'
 import Marker from '../components/Map/Marker'
+import MarkerDetails from '../components/Map/MarkerDetails'
 import Stylers from '../components/Map/stylers'
 
-let GoogleMap = createClass({
+const GoogleMap = createClass({
   getDefaultProps() {
     return {
       center: { lat: 39.1031182, lng: -84.5120196 }, // Cincinnati
@@ -42,6 +43,32 @@ let GoogleMap = createClass({
       })
   },
 
+  showMarkerDetail(e) {
+    const {target} = e
+    let {place, visitor} = target.dataset
+    const element = document.getElementById('marker-details-modal')
+
+    if (place) place = JSON.parse(place)
+    if (visitor) visitor = JSON.parse(visitor)
+
+    let message
+    if (visitor) message = visitor.message
+    if (message) message = `${message} - ${visitor.name}`
+
+    if (place && place.name) element.children[0].innerHTML = place.name
+    else element.children[0].innerHTML = 'Unspecified Location'
+    element.children[1].innerHTML = message
+
+    const bounds = target.getBoundingClientRect()
+    element.style.display = 'inline-block'
+    element.style.left = `${Math.abs(bounds.left + 3)}px`
+    element.style.top = `${Math.abs(bounds.top + 3)}px`
+  },
+
+  // closeModal(e) {
+  //   e.target.parentNode.parentNode.style.display = 'none'
+  // },
+
   componentWillMount() {
     this.getLocations()
   },
@@ -55,23 +82,26 @@ let GoogleMap = createClass({
           options={this.createMapOptions}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}>
-          {places.map((place, i) => {
-            let {location, visitor} = place
-            let message, name
-
-            if (visitor) message = visitor.message, name = visitor.name
+          {places.map((p, i) => {
+            let {location, place, visitor} = p
 
             return (
               <Marker
                 key={i}
-                lat={place.location.latitude}
-                lng={place.location.longitude}/>
+                lat={location.latitude}
+                lng={location.longitude}
+                visitor={visitor}
+                place={place}
+                showMarkerDetail={this.showMarkerDetail} />
             )
           })}
         </GoogleMapReact>
+        <MarkerDetails />
       </DefaultLayout>
     )
   }
 })
+
+GoogleMap.displayName = 'GoogleMapContainer'
 
 export default GoogleMap
