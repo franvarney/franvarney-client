@@ -21,7 +21,9 @@ let Home = createClass({
 
   formatActivities(activities) {
     return activities.map((activity) => {
-      return [activity.date, parseInt(activity.total)]
+      let total = parseInt(activity.total)
+      if (total > 60) total = 60 // keeps the graph looking good
+      return [activity.date, total]
     })
   },
 
