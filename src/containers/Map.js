@@ -18,6 +18,7 @@ const GoogleMap = createClass({
 
   getInitialState() {
     return {
+      allPlaces: [],
       places: []
     }
   },
@@ -39,6 +40,7 @@ const GoogleMap = createClass({
         if (err) console.error(err)
 
         this.state.places = JSON.parse(response.text)
+        this.state.allPlaces = this.state.places
         this.setState(this.state)
       })
   },
@@ -65,12 +67,28 @@ const GoogleMap = createClass({
     element.style.top = `${Math.abs(bounds.top + 3)}px`
   },
 
-  // closeModal(e) {
-  //   e.target.parentNode.parentNode.style.display = 'none'
-  // },
+  filterPlaces(isVisitor) {
+    const {allPlaces} = this.state
+    const filtered = allPlaces.filter((place) => isVisitor === place.isVisitor)
+
+    this.state.places = filtered
+    this.setState(this.state)
+  },
+
+  myPlaces() {
+    return this.filterPlaces(false)
+  },
+
+  visitorPlaces() {
+    return this.filterPlaces(true)
+  },
 
   componentWillMount() {
     this.getLocations()
+  },
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.places === this.state.places
   },
 
   render() {
@@ -78,6 +96,17 @@ const GoogleMap = createClass({
 
     return (
       <DefaultLayout classes="page-map">
+        <div id="button-wrap">
+          <div className="link-button dark">
+            <a onClick={this.myPlaces}>Places I've Been &raquo;</a>
+          </div>
+          <div className="link-button dark">
+            <a onClick={this.visitorPlaces}>Visitor Messages &raquo;</a>
+          </div>
+          <div className="link-button dark">
+            <a onClick={this.getLocations}>Show All &raquo;</a>
+          </div>
+        </div>
         <GoogleMapReact
           options={this.createMapOptions}
           defaultCenter={this.props.center}
