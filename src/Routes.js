@@ -10,6 +10,7 @@ import Checkin from './containers/Checkin'
 import CSS from './styles/index.styl'
 import Home from './containers/Home'
 import GoogleMap from './containers/Map'
+import Photos from './containers/Photos'
 import Resume from './containers/Resume'
 
 let routes = (
@@ -18,8 +19,9 @@ let routes = (
       <IndexRoute component={Home} />
       <Route path="blog" component={Blogs} />
       <Route path="blog/:slug" component={BlogShow} />
-      <Route path="resume" component={Resume} />
       <Route path="checkin" component={Checkin} />
+      <Route path="photos" component={Photos} />
+      <Route path="resume" component={Resume} />
       <Route path="map" component={GoogleMap} />
     </Route>
   </Router>
