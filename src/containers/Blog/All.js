@@ -31,7 +31,7 @@ let BlogAll = createClass({
 
   render() {
     return (
-      <DefaultLayout clases="page-blogs">
+      <DefaultLayout classes="page-blogs">
         <Blogs posts={this.state.posts} />
       </DefaultLayout>
     )

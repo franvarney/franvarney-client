@@ -32,7 +32,7 @@ let BlogShow = createClass({
 
   render() {
     return (
-      <DefaultLayout clases="page-blog-show">
+      <DefaultLayout classes="page-blog-show">
         <BlogPost post={this.state.post} hasComments={true} />
       </DefaultLayout>
     )
