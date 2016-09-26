@@ -3,20 +3,22 @@ import React, {createClass} from 'react'
 import Header from '../components/Layout/Header'
 import SocialIcons from '../components/Layout/SocialIcons'
 
-let DefaultLayout = createClass({
-  render() {
+const DefaultLayout = createClass({
+  render () {
     return (
       <div className={`${this.props.classes} page`}>
-        <section className="one-fourth-col col">
+        <section className="one-fourth column light">
           <Header />
           <SocialIcons />
         </section>
-        <section className="three-fourth-col col">
+        <section className="three-fourth column white">
           {this.props.children}
         </section>
       </div>
     )
   }
 })
+
+DefaultLayout.displayName = 'DefaultLayout'
 
 export default DefaultLayout
