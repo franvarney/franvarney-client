@@ -10,11 +10,15 @@ function hasMore (currentPage, totalPages) {
   return Number(currentPage) < Number(totalPages)
 }
 
+function isMobileSize () {
+  return !!window.matchMedia('screen and (max-width: 415px)').matches
+}
+
 const Photos = createClass({
   getInitialState () {
     return {
       hasMore: true,
-      isMobile: window.matchMedia('screen and (max-width: 415px)').matches || false,
+      isMobile: isMobileSize(),
       limit: 5,
       page: 1,
       photos: []
