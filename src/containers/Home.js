@@ -22,7 +22,7 @@ const Home = createClass({
 
   handleResize () {
     this.setState({
-      width: document.getElementsByClassName('github-activity-container')[0].offsetWidth - 70
+      width: document.getElementById('github-activity').offsetWidth - 70
     })
   },
 
@@ -60,16 +60,16 @@ const Home = createClass({
   render () {
     return (
       <DefaultLayout classes="page-home">
-        <div className="wrap-container container">
+        <div className="wrap container">
           <AboutMe />
           <ImageBlock img={Ducky} />
         </div>
-        <div className="github-activity-container container">
-          <h2>Github Activity</h2>
+        <div id="github-activity" className="container white">
+          <h2 className="full">Github Activity</h2>
           <GithubActivityGraph activities={this.state.activities} width={this.state.width} />
         </div>
         <BlogSnippet />
-        <div className="wrap-container container">
+        <div className="wrap container">
           <Experience jobs={this.state.jobs} />
           <ImageBlock img={Lilac} />
         </div>
