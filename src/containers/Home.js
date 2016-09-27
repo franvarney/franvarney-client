@@ -6,66 +6,68 @@ import BlogSnippet from '../components/Blog/Snippet/Container'
 import Config from '../config'
 import DefaultLayout from '../layouts/Default'
 import Experience from '../components/Jobs/Container'
-import GithubActivities from '../components/GithubActivities/Container'
+import GithubActivityGraph from '../components/GitHubActivities'
 import ImageBlock from '../components/Layout/ImageBlock'
 import Lilac from '../assets/images/lilac.jpg'
 import Ducky from '../assets/images/ducky.jpg'
 
-let Home = createClass({
-  getInitialState() {
+const Home = createClass({
+  getInitialState () {
     return {
       activities: [],
-      jobs: []
+      jobs: [],
+      width: 0
     }
   },
 
-  formatActivities(activities) {
-    return activities.map((activity) => {
-      let total = parseInt(activity.total)
-      if (total > 60) total = 60 // keeps the graph looking good
-      return [activity.date, total]
+  handleResize () {
+    this.setState({
+      width: document.getElementsByClassName('github-activity-container')[0].offsetWidth - 70
     })
   },
 
-  getActivities() {
+  getActivities () {
     Request
       .get(`${Config.api.url}/github/activities`)
       .set('Content-Type', 'application/json')
-      .end((err, res) => {
+      .end((err, response) => {
         if (err) console.log(err)
-
-        this.state.activities = this.formatActivities(JSON.parse(res.text))
+        this.state.activities = response.body
         this.setState(this.state)
       })
   },
 
-  getJobs() {
+  getJobs () {
     let url = `${Config.api.url}/jobs?present=true`
 
     Request
       .get(url)
       .set('Content-Type', 'application/json')
-      .end((err, res) => {
+      .end((err, response) => {
         if (err) console.log(err)
-
-        this.state.jobs = JSON.parse(res.text)
+        this.state.jobs = response.body
         this.setState(this.state)
       })
   },
 
-  componentDidMount() {
+  componentDidMount () {
+    this.handleResize()
     this.getActivities()
     this.getJobs()
+    window.addEventListener('resize', this.handleResize)
   },
 
-  render() {
+  render () {
     return (
       <DefaultLayout classes="page-home">
         <div className="wrap-container container">
           <AboutMe />
           <ImageBlock img={Ducky} />
         </div>
-        <GithubActivities activities={this.state.activities} />
+        <div className="github-activity-container container">
+          <h2>Github Activity</h2>
+          <GithubActivityGraph activities={this.state.activities} width={this.state.width} />
+        </div>
         <BlogSnippet />
         <div className="wrap-container container">
           <Experience jobs={this.state.jobs} />

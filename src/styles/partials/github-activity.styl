@@ -1,16 +1,27 @@
 .github-activity-container {
   padding: $padding
 
-  .rd3-basic-chart {
-    margin-top: 16px
+  .bar {
+    fill: $blended
+  }
 
-    .rd3-areachart-xaxis, .rd3-areachart-yaxis {
-      font-size: 12px
-      text-transform: uppercase
-    }
+  .axis {
+    font-size: 12px
+    text-transform: uppercase
+  }
 
-    .rd3-areachart-area {
-      fill: $darkBackground
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: $darkGrey
+    shape-rendering: crispEdges
+  }
+
+  .y.axis {
+    .tick {
+      &:nth-child(even) {
+        display: none
+      }
     }
   }
 }

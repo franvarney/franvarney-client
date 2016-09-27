@@ -1,4 +1,18 @@
 export default {
+  abbreviatedMonthNames: [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ],
   monthNames: [
     'January',
     'February',
