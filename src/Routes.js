@@ -1,7 +1,7 @@
 import {createHistory} from 'history'
 import React from 'react'
 import {render} from 'react-dom'
-import {IndexRoute, Route, Router, useRouterHistory} from 'react-router'
+import {IndexRoute, Route, Router} from 'react-router'
 
 import App from './containers/App'
 import Blogs from './containers/Blog/All'
@@ -13,7 +13,7 @@ import GoogleMap from './containers/Map'
 import Photos from './containers/Photos'
 import Resume from './containers/Resume'
 
-let routes = (
+const routes = (
   <Router history={createHistory()}>
     <Route path='/' component={App}>
       <IndexRoute component={Home} />

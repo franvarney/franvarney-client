@@ -4,25 +4,14 @@ import Request from 'superagent'
 import Config from '../../config'
 import SubmitLocation from './SubmitLocation'
 
-let SelectLocation = createClass({
-  propTypes: {
-    place: PropTypes.arrayOf(PropTypes.shape({
-      location: PropTypes.shape({
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired
-      }),
-      name: PropTypes.string,
-      placeId: PropTypes.string
-    }))
-  },
-
-  getInitialState() {
+const SelectLocation = createClass({
+  getInitialState () {
     return {
       selected: null
     }
   },
 
-  selectPlace(e) {
+  selectPlace( e) {
     let {place} = e.target.dataset
     place = JSON.parse(place)
     let {location, name, placeId} = place
@@ -31,11 +20,11 @@ let SelectLocation = createClass({
     this.setState(this.state)
   },
 
-  shouldComponentUpdate: function (nextProps, nextState) {
+  shouldComponentUpdate (nextProps, nextState) {
     return nextState.selected === this.state.selected
   },
 
-  render() {
+  render () {
     const {places} = this.props
 
     if (this.state.selected) return (<SubmitLocation place={this.state.selected} />)
@@ -60,5 +49,18 @@ let SelectLocation = createClass({
     )
   }
 })
+
+SelectLocation.displayName = 'SelectLocationComponent'
+
+SelectLocation.propTypes = {
+  place: PropTypes.arrayOf(PropTypes.shape({
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired
+    }),
+    name: PropTypes.string,
+    placeId: PropTypes.string
+  }))
+}
 
 export default SelectLocation

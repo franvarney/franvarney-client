@@ -1,16 +1,16 @@
-import React, {createClass, PropTypes} from 'react'
+import React, {createClass} from 'react'
 import ReactMarkdown from 'react-markdown'
 
 import FormatDate from '../../../utils/format-date'
 
-let BlogSnippetPost = createClass({
-  getInitialState() {
+const BlogSnippetPost = createClass({
+  getInitialState () {
     return {
       post: {}
     }
   },
 
-  render() {
+  render () {
     let {createdAt, summary, slug, title} = this.props.post
 
     return (
@@ -22,5 +22,7 @@ let BlogSnippetPost = createClass({
     )
   }
 })
+
+BlogSnippetPost.displayName = 'BlogSnippetComponent'
 
 export default BlogSnippetPost

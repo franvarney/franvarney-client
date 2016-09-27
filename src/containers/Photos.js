@@ -6,7 +6,7 @@ import Config from '../config'
 import DefaultLayout from '../layouts/Default'
 import Photo from '../components/Photo.js'
 
-function hasMore(currentPage, totalPages) {
+function hasMore (currentPage, totalPages) {
   return Number(currentPage) < Number(totalPages)
 }
 
@@ -32,7 +32,7 @@ const Photos = createClass({
       .end((err, response) => {
         if (err) console.log(err)
 
-        const {body} = response
+        const {body} = response || {}
         const {
           page: currentPage=1,
           pages: totalPages=1,

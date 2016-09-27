@@ -1,5 +1,4 @@
 import React, {createClass} from 'react'
-
 import Request from 'superagent'
 
 import Config from '../../../config'

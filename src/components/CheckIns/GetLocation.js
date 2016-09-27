@@ -5,25 +5,14 @@ import Config from '../../config'
 import ErrorMessage from '../layout/Error'
 import SelectLocation from './SelectLocation'
 
-let GetLocation = createClass({
-  propTypes: {
-    places: PropTypes.arrayOf(React.PropTypes.shape({
-      location: PropTypes.shape({
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired
-      }),
-      name: PropTypes.string,
-      placeId: PropTypes.string
-    }))
-  },
-
-  getInitialState() {
+const GetLocation = createClass({
+  getInitialState () {
     return {
       places: []
     }
   },
 
-  getPlaces() {
+  getPlaces () {
     const {latitude, longitude} = this.props.location
     const {value} = document.getElementById('keyword')
     let url = `${Config.api.url}/places/search?location=${latitude},${longitude}`
@@ -46,16 +35,16 @@ let GetLocation = createClass({
       })
   },
 
-  componentDidMount() {
+  componentDidMount () {
     document.getElementById('keyword').focus()
   },
 
-  shouldComponentUpdate: function (nextProps, nextState) {
+  shouldComponentUpdate (nextProps, nextState) {
     return nextState.places === this.state.places ||
            nextProps.error !== this.props.error
   },
 
-  render() {
+  render () {
     if (this.state.places.length) return (<SelectLocation places={this.state.places} />)
 
     let error = null
@@ -74,5 +63,18 @@ let GetLocation = createClass({
     )
   }
 })
+
+GetLocation.displayName = 'GetLocationComponent'
+
+GetLocation.propTypes =  {
+  places: PropTypes.arrayOf(React.PropTypes.shape({
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired
+    }),
+    name: PropTypes.string,
+    placeId: PropTypes.string
+  }))
+}
 
 export default GetLocation

@@ -5,27 +5,16 @@ import Request from 'superagent'
 import Config from '../../config'
 import ErrorMessage from '../layout/Error'
 
-let SubmitPlace = createClass({
+const SubmitPlace = createClass({
   mixins: [History],
 
-  propTypes: {
-    place: PropTypes.shape({
-      location: PropTypes.shape({
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired
-      }),
-      name: PropTypes.string,
-      placeId: PropTypes.string
-    })
-  },
-
-  getInitialState() {
+  getInitialState () {
     return {
       error: null
     }
   },
 
-  submitPlace(event) {
+  submitPlace (event) {
     const {value: message} = document.getElementById('message')
     const {value: name} = document.getElementById('name')
 
@@ -61,15 +50,15 @@ let SubmitPlace = createClass({
       })
   },
 
-  componentDidMount() {
+  componentDidMount () {
     document.getElementById('message').focus()
   },
 
-  shouldComponentUpdate: function (nextProps, nextState) {
+  shouldComponentUpdate (nextProps, nextState) {
     return nextState.error === this.state.error
   },
 
-  render() {
+  render () {
     const {location, name, placeId} = this.props.place
 
     let place = null
@@ -94,5 +83,18 @@ let SubmitPlace = createClass({
     )
   }
 })
+
+SubmitPlace.displayName = 'SubmitPlaceComponent'
+
+SubmitPlace.propTypes = {
+  place: PropTypes.shape({
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired
+    }),
+    name: PropTypes.string,
+    placeId: PropTypes.string
+  })
+}
 
 export default SubmitPlace

@@ -1,6 +1,6 @@
-import React, {createClass, PropTypes} from 'react'
+import React, {createClass} from 'react'
 
-let AboutMe = createClass({
+const AboutMe = createClass({
   render() {
     return (
       <div className="about-me-container container">
@@ -15,5 +15,7 @@ let AboutMe = createClass({
     )
   }
 })
+
+AboutMe.displayName = 'AboutMeComponent'
 
 export default AboutMe

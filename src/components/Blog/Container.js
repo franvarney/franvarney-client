@@ -1,9 +1,9 @@
-import React, {createClass, PropTypes} from 'react'
+import React, {createClass} from 'react'
 
 import Post from './Post'
 
-let BlogContainer = createClass({
-  render() {
+const Blog = createClass({
+  render () {
     return (
       <div className="blogs-container container">
         { this.props.posts.map((post, index) => {
@@ -14,4 +14,6 @@ let BlogContainer = createClass({
   }
 })
 
-export default BlogContainer
+Blog.displayName = 'BlogContainer'
+
+export default Blog

@@ -1,18 +1,18 @@
-import React, {createClass, PropTypes} from 'react'
+import React, {createClass} from 'react'
 import ReactDisqusThread from 'react-disqus-thread'
 import ReactMarkdown from 'react-markdown'
 import {Link} from 'react-router'
 
 import FormatDate from '../../utils/format-date'
 
-let BlogPost = createClass({
-  getInitialState() {
+const BlogPost = createClass({
+  getInitialState () {
     return {
       post: {}
     }
   },
 
-  render() {
+  render () {
     let {content, createdAt, _id, slug, title} = this.props.post
     let header = (<h2>{title}</h2>), comments = null
 
@@ -32,5 +32,7 @@ let BlogPost = createClass({
     )
   }
 })
+
+BlogPost.displayName = 'BlogPostComponent'
 
 export default BlogPost

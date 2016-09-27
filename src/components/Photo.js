@@ -16,8 +16,9 @@ function formatUrl (id, owner) {
 }
 
 const Photo = createClass({
-  getInitialState () {
+  getDefaultProps () {
     return {
+      isMobile: false,
       photo: {}
     }
   },
@@ -34,6 +35,17 @@ const Photo = createClass({
   }
 })
 
-Photo.displayName = 'Photo'
+Photo.displayName = 'PhotoComponent'
+
+Photo.propTypes = {
+  isMobile: PropTypes.bool.isRequired,
+  photo: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    farm: PropTypes.string.isRequired,
+    owner: PropTypes.string.isRequired,
+    secret: PropTypes.string.isRequired,
+    server: PropTypes.string.isRequired
+  })
+}
 
 export default Photo
