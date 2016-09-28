@@ -11,6 +11,13 @@ const MARGIN = {
   top: 35
 }
 
+const MOBILE_MARGIN = {
+  bottom: 20,
+  left: 25,
+  right: 0,
+  top: 20
+}
+
 function formatActivities (activities) {
   const data = []
 
@@ -45,7 +52,7 @@ const GithubActivityGraph = createClass({
         ylabel='Activities'
         width={this.props.width}
         height={HEIGHT}
-        margin={MARGIN}
+        margin={this.props.width < 769 ? MOBILE_MARGIN : MARGIN}
         data={formatActivities(this.props.activities)} />
     )
   }

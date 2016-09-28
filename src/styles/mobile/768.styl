@@ -1,66 +1,46 @@
 @media (max-width: 768px) {
-  .col {
-    display: block
-    float: none
-    width: 100%
+  .one-fourth, .three-fourth {
+    width: 100% !important
   }
 
-  .one-fourth-col {
-    height: 150px
-    position: fixed
-    top: 0
-    z-index: 1
-  }
+  .one-fourth {
+    height: 140px
 
-  .three-fourth-col {
-    margin: 150px 0 0
-  }
-
-  header {
-    display: inline-block
-    height: 100%
-    width: auto
-
-    a {
+    header {
       display: inline-block
       height: 100%
-      width: auto
-    }
+      position: relative
 
-    img {
-      height: 100%
-      width: auto
+      a {
+        display: inline-block
+        height: 100%
+        position: relative
+      }
+
+      img {
+        height: 100%
+        position: relative
+        width: auto
+      }
     }
   }
 
   .social-container {
-    bottom: initial
+    display: inline-block
+    float: right
     height: 100%
-    left: initial
-    line-height: 70px
-    margin: -1px 0 0 0
-    padding: 55px
-    top: 0
+    margin: 0
+    position: relative
 
     ul {
       height: 100%
       margin: 0
+      width: 120px
     }
 
-    li img {
-      height: 100%
-      margin: 0
-      width: auto
+    li {
+      height: 45px
+      margin: 0 0 10px 10px
     }
-  }
-
-  .photos {
-    a {
-      width: 100%
-    }
-  }
-
-  .link-button.fixed {
-    left: 0
   }
 }

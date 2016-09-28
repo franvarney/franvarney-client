@@ -6,7 +6,7 @@ import SocialIcons from '../components/Layout/SocialIcons'
 const DefaultLayout = createClass({
   render () {
     return (
-      <div className={`${this.props.classes} page`}>
+      <div className={`${this.props.classes} page row`}>
         <section className="one-fourth column light">
           <Header />
           <SocialIcons />

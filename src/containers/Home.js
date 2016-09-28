@@ -1,14 +1,14 @@
 import React, {createClass} from 'react'
 import Request from 'superagent'
 
-import AboutMe from '../components/AboutMe'
-import BlogSnippet from '../components/Blog/Snippet/Container'
+import BlogSnippet from '../components/Blog/Snippet'
 import Config from '../config'
 import DefaultLayout from '../layouts/Default'
-import Experience from '../components/Jobs/Container'
+import Job from '../components/Job'
 import GithubActivityGraph from '../components/GitHubActivities'
 import ImageBlock from '../components/Layout/ImageBlock'
 import Lilac from '../assets/images/lilac.jpg'
+import LinkButton from '../components/Layout/LinkButton'
 import Ducky from '../assets/images/ducky.jpg'
 
 const Home = createClass({
@@ -16,6 +16,7 @@ const Home = createClass({
     return {
       activities: [],
       jobs: [],
+      post: {},
       width: 0
     }
   },
@@ -38,10 +39,8 @@ const Home = createClass({
   },
 
   getJobs () {
-    let url = `${Config.api.url}/jobs?present=true`
-
     Request
-      .get(url)
+      .get(`${Config.api.url}/jobs`)
       .set('Content-Type', 'application/json')
       .end((err, response) => {
         if (err) console.log(err)
@@ -50,28 +49,60 @@ const Home = createClass({
       })
   },
 
+  getLatestPost () {
+    Request
+      .get(`${Config.api.url}/posts?latest=true`)
+      .set('Content-Type', 'application/json')
+      .end((err, response) => {
+        if (err) console.log(err)
+        this.state.post = response.body[0]
+        this.setState(this.state)
+      })
+  },
+
   componentDidMount () {
     this.handleResize()
     this.getActivities()
     this.getJobs()
+    this.getLatestPost()
     window.addEventListener('resize', this.handleResize)
   },
 
   render () {
+    const {jobs, post} = this.state
+
     return (
       <DefaultLayout classes="page-home">
-        <div className="wrap container">
-          <AboutMe />
-          <ImageBlock img={Ducky} />
+        <div className="row dark">
+          <div id="about-me" className="column half dark">
+            <h2 className="full">About</h2>
+            <p>Hi! I'm Fran Varney. I'm currently a software engineer at Modulus.</p>
+            <p>I grew up loving art and started on a path to photography, but after
+            taking a programming class for fun, I ended up loving it and made my move
+            into development.</p>
+            <p>In my free time I still love photography, along with drooling over
+            mechanical keyboards and playing video games.</p>
+          </div>
+          <div id="keyboard" className="column half image"><img src={Ducky} /></div>
         </div>
-        <div id="github-activity" className="container white">
-          <h2 className="full">Github Activity</h2>
-          <GithubActivityGraph activities={this.state.activities} width={this.state.width} />
+        <div id="github-activity" className="row white">
+          <div className="column">
+            <h2 className="full">Github</h2>
+            <GithubActivityGraph activities={this.state.activities} width={this.state.width} />
+          </div>
         </div>
-        <BlogSnippet />
-        <div className="wrap container">
-          <Experience jobs={this.state.jobs} />
-          <ImageBlock img={Lilac} />
+        <BlogSnippet post={post} />
+        <div className="row white">
+          <div id="lilac" className="column half image"><img src={Lilac} /></div>
+          <div id="jobs" className="column half white">
+            <h2 className="column">Career</h2>
+            {jobs.map((job, index) => {
+              return <Job key={index} job={job} />
+            })}
+            <div className="link-button row">
+              <LinkButton path="/resume" text="See Full Resume" />
+            </div>
+          </div>
         </div>
       </DefaultLayout>
     )

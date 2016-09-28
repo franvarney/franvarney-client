@@ -1,44 +1,34 @@
 .page-home {
-  .about-me-container {
-    background-color: $darkBackground
+  #about-me {
     color: $lightText
-    display: inline-block
-    float: left
-    height: 100%
     padding: $padding
-    width: 50%
 
     h2 {
       color: $lightText
     }
   }
 
-  .wrap {
+  #jobs {
+    padding: $padding
+  }
+
+  .image {
     display: block
-    height: 315px
-    position: relative
-    width: 100%
+    height: 100%
+    max-height: 325px;
+    overflow: hidden
 
-    .image-container {
-      display: inline-block
-      float: left
-      height: 100%
-      width: 50%
-
-      > div {
-        background-position-y: 80%
-        background-repeat: no-repeat
-        background-size: 100% auto
-        display: block
-        height: 100%
-      }
+    img {
+      margin: 0 !important
     }
   }
 
-  .wrap:last-child {
-    height: 459px
+  #lilac {
+    max-height: 364px
+  }
 
-    .link-button-container {
+  .row:last-child {
+    .link-button {
       margin-top: $padding
       text-align: right
 
