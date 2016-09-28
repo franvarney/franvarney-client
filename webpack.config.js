@@ -17,6 +17,9 @@ var basePlugins = [
   new Webpack.DefinePlugin({
     __DEVELOPMENT__: process.env.NODE_ENV !== 'production',
     __PRODUCTION__: process.env.NODE_ENV === 'production',
+    'process.env': {
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV) // to remove the minification error
+    }
   }),
   new HtmlWebpackPlugin({
     template: './src/templates/index.html',
