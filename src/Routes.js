@@ -1,7 +1,6 @@
-import {createHistory} from 'history'
 import React from 'react'
 import {render} from 'react-dom'
-import {IndexRoute, Route, Router} from 'react-router'
+import {browserHistory, IndexRoute, Route, Router} from 'react-router'
 
 import App from './containers/App'
 import Blogs from './containers/Blog/All'
@@ -14,7 +13,7 @@ import Photos from './containers/Photos'
 import Resume from './containers/Resume'
 
 const routes = (
-  <Router history={createHistory()}>
+  <Router history={browserHistory}>
     <Route path='/' component={App}>
       <IndexRoute component={Home} />
       <Route path="blog" component={Blogs} />
