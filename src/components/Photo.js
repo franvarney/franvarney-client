@@ -8,7 +8,7 @@ function useMobileImage (isMobile) {
 function formatImageUrl (photo, isMobile=false) {
   const {farm, id, secret, server} = photo
   const mobile = useMobileImage(isMobile)
-  return `http://farm${farm}.static.flickr.com/${server}/${id}_${secret}${mobile}.jpg`
+  return `https://farm${farm}.static.flickr.com/${server}/${id}_${secret}${mobile}.jpg`
 }
 
 function formatUrl (id, owner) {
@@ -41,7 +41,7 @@ Photo.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   photo: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    farm: PropTypes.string.isRequired,
+    farm: PropTypes.number.isRequired,
     owner: PropTypes.string.isRequired,
     secret: PropTypes.string.isRequired,
     server: PropTypes.string.isRequired
