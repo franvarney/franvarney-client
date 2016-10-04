@@ -1,14 +1,25 @@
 * {
   box-sizing: border-box
+  &:focus {
+    outline: none
+  }
 }
 
 html, body {
-  position: relative
   height: 100%
+  position: relative
 }
 
 body {
   margin: 0 auto
+}
+
+h2, ul, li, hr {
+  -webkit-margin-before: 0
+  -webkit-margin-after: 0
+  -webkit-margin-start: 0
+  -webkit-margin-end: 0
+  -webkit-padding-start: 0
 }
 
 #root,
@@ -26,13 +37,13 @@ h2 {
   color: $darkText
   font-size: 32px
   line-height: 32px
-  padding: 0 0 15px 0
+  margin: 0 0 15px 0
   text-transform: uppercase
 }
 
 h4 {
   font-size: 20px
-  padding: 0 0 5px 0
+  padding 0 0 5px 0
 }
 
 h5 {
@@ -57,18 +68,6 @@ img {
   width: 100%
 }
 
-img.half {
-  width: 50%
-}
-
-ul, li {
-  -webkit-margin-before: 0
-  -webkit-margin-after: 0
-  -webkit-margin-start: 0
-  -webkit-margin-end: 0
-  -webkit-padding-start: 0
-}
-
 pre {
   background-color: $codeBackground
   padding: 15px
@@ -76,44 +75,51 @@ pre {
   width: 100%
 }
 
-code {
-  background-color: $codeBackground
-  color: lighten($darkText, 10%)
-  font-size: 14px
-}
-
 p > code {
   padding: 2px 5px
 }
 
-span.link-button {
-  height: 50px
-  margin-left: 10px
-  padding: 10px
-  width: auto
-
-  a {
-    color: $lightBackground
-  }
-}
-
-.link-button.dark {
-  bottom: $padding
+.link-button, .link {
   cursor: pointer
   display: inline-block
   height: 50px
-  text-align: center
-  width: 200px
+  vertical-align: middle
 
   a {
-    color: $lightText
     display: block
     line-height: 50px
     text-decoration: underline
   }
 }
 
+.links {
+  margin-top: $padding
+  text-align: right
+}
+
+.link-button {
+  border: none
+  width: 200px
+
+  a {
+    color: $lightText
+    height: 100%
+    text-align: center
+  }
+}
+
+.link {
+  padding: 10px 0 10px 35px
+  width: auto
+
+  a {
+    color: $lightBackground
+    text-align: center
+  }
+}
+
 .link-button.fixed {
+  bottom: 5%
   left: 25%
   margin: 0 auto
   position: fixed
@@ -125,30 +131,14 @@ span.link-button {
   font-style: italic
 }
 
-input {
-  line-height: $padding
-
-  &:focus {
-    outline: none
-  }
+hr {
+  background-color: $lightGrey
+  border: 0
+  height: 5px
+  margin-bottom: 15px
+  width: 100%
 }
 
-::-webkit-input-placeholder {
-   font-size: 12px
-   padding-left: 2px
-}
-
-:-moz-placeholder { /* Firefox 18- */
-   font-size: 12px
-   padding-left: 2px
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-   font-size: 12px
-   padding-left: 2px
-}
-
-:-ms-input-placeholder {
-   font-size: 12px
-   padding-left: 2px
+hr.divider:nth-child(odd) {
+  margin-bottom: 20px
 }

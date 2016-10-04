@@ -1,0 +1,47 @@
+form
+  font-size: 16px
+
+/* TEXT, PASSWORD, TEXTAREA */
+input[type="text"],
+input[type="password"],
+textarea
+  border()
+  colo: $darkText
+  line-height 24px
+  margin-bottom 15px
+  padding 5px 10px
+  width 100%
+
+.half
+  input[type="text"],
+  input[type="password"],
+  textarea
+    margin-right 15px
+
+textarea
+  height: 122px /* 3x input=text size */
+  resize none
+
+:-moz-placeholder,
+:-ms-input-placeholder, /* Firefox 18- */
+::-webkit-input-placeholder, /* Firefox 19+ */
+::-moz-placeholder
+   padding 5px 10px
+
+/* RADIO AND CHECKBOX */
+input[type="checkbox"],
+input[type="radio"]
+  border()
+  height: 24px
+  -webkit-appearance none
+  width 24px
+  &:checked
+    background-color $darkBackground
+
+.radio.value,
+.check.value
+  font-weight 400
+  line-height 24px
+  margin 0 15px 0 5px
+  text-transform none
+  vertical-align top
