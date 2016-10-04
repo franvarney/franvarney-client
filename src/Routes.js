@@ -4,6 +4,7 @@ import {browserHistory, IndexRoute, Route, Router} from 'react-router'
 
 import App from './containers/App'
 import Blogs from './containers/Blog/All'
+import BlogCreate from './containers/Blog/Create'
 import BlogShow from './containers/Blog/Show'
 import Checkin from './containers/Checkin'
 import CSS from './styles/index.styl'
@@ -17,6 +18,7 @@ const routes = (
     <Route path='/' component={App}>
       <IndexRoute component={Home} />
       <Route path="blog" component={Blogs} />
+      <Route path="blog/create" component={BlogCreate} />
       <Route path="blog/:slug" component={BlogShow} />
       <Route path="checkin" component={Checkin} />
       <Route path="photos" component={Photos} />
