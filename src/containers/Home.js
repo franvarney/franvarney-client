@@ -99,7 +99,7 @@ const Home = createClass({
             {jobs.map((job, index) => {
               return <Job key={index} job={job} />
             })}
-            <div className="link-button row">
+            <div className="links row">
               <LinkButton path="/resume" text="See Full Resume" />
             </div>
           </div>
