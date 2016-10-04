@@ -25,7 +25,7 @@ const BlogSnippetPost = createClass({
               <div dangerouslySetInnerHTML={{ __html: summary }}></div>
             </div>
           }
-          <div className="link-button row">
+          <div className="links row">
             {title && <LinkButton path={`/blog/${slug}`} text="Read More" />}
             <LinkButton path="/blog" text="View All" />
           </div>
