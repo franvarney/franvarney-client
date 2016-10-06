@@ -4,7 +4,8 @@ import Config from '../config'
 
 const CONTENT_TYPE = 'application/json'
 const ERROR_MESSAGES = {
-  '401': 'Authentication failed'
+  '401': 'Authentication failed',
+  '404': 'Not found'
 }
 
 function setAuthorization (data) {
@@ -14,11 +15,12 @@ function setAuthorization (data) {
 
 function endRequest (done) {
   return function (err, response) {
-    if (err && !response.body) return done(err.message || err)
-    if (err && (response.body && response.body.error)) {
-      return done(ERROR_MESSAGES[response.body.statusCode])
+    const {body} = response
+    if (err && !body) return done(err.message || err)
+    if (err && (body && body.error)) {
+      return done(ERROR_MESSAGES[body.statusCode])
     }
-    return done(null, response.body)
+    return done(null, body)
   }
 }
 
@@ -27,13 +29,13 @@ function makeRequest (request, headers, done) {
   return request.type(CONTENT_TYPE).set(headers).end(endRequest(done))
 }
 
-const Post = {
+export const Post = {
   create (data, done) {
     const request = Superagent.post(`${Config.api.url}/posts`).send(data)
     return makeRequest(request, setAuthorization(data), done)
+  },
+  get (slug, done) {
+   const request = Superagent.get(`${Config.api.url}/posts/${slug}`)
+   return makeRequest(request, done)
   }
-}
-
-export default {
-  Post
 }
