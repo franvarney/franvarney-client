@@ -5,12 +5,6 @@ import FormatDate from '../../utils/format-date'
 import LinkButton from '../Layout/LinkButton'
 
 const BlogSnippetPost = createClass({
-  getInitialState () {
-    return {
-      post: {}
-    }
-  },
-
   render () {
     const {createdAt, summary, slug, title} = this.props.post
 
@@ -39,11 +33,11 @@ BlogSnippetPost.displayName = 'BlogSnippetComponent'
 
 BlogSnippetPost.propTypes = {
   post: PropTypes.shape({
-    createdAt: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-    summary: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
-  })
+    createdAt: PropTypes.string,
+    slug: PropTypes.string,
+    summary: PropTypes.string,
+    title: PropTypes.string
+  }).isRequired
 }
 
 export default BlogSnippetPost

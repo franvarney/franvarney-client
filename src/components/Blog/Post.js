@@ -10,7 +10,11 @@ const BlogPost = createClass({
     return {
       editing: false,
       hasComments: false,
-      post: {}
+      post: {
+        category: null,
+        isHtml: false,
+        tags: []
+      }
     }
   },
 
@@ -21,9 +25,14 @@ const BlogPost = createClass({
 
   render () {
     const {editing, hasComments, post} = this.props
+
+    if (!post) {
+      return (<div className="blog-post row">Loading...</div>)
+    }
+
     const {
       category, content, createdAt, _id,
-      isHtml=false, slug, tags=[], title
+      isHtml, slug, tags, title
     } = post
 
     return (
@@ -41,7 +50,12 @@ const BlogPost = createClass({
         }
         {!post.isHtml && <ReactMarkdown source={content} />}
         {post.isHtml && <div dangerouslySetInnerHTML={{ __html: content }}></div>}
-        {tags.length > 0 && <p>Tags: {tags.join(', ')}</p>}
+        {tags.length > 0 &&
+          <div id="tags" className="row">
+            <hr className="divider" />
+            <h4>Tags:</h4><span >{tags.join(', ')}</span>
+          </div>
+        }
         {(hasComments && !editing) &&
           <ReactDisqusThread
             shortname="franvarney"

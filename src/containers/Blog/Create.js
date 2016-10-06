@@ -7,7 +7,7 @@ import BlogPost from '../../components/Blog/Post'
 import Button from '../../components/Layout/Button'
 import Config from '../../config'
 import DefaultLayout from '../../layouts/Default'
-import SDK, {Post} from '../../utils/sdk'
+import {Post} from '../../utils/sdk'
 
 const REQUIRED = [
   'title', 'summary', 'content',
@@ -123,7 +123,7 @@ const BlogCreate = createClass({
     this.validate(post)
     if (this.state.error) return
 
-    SDK.Post.create(post, (err, created) => {
+    Post.create(post, (err, created) => {
       if (err) return this.setState({ error: err })
       window.location = '/blog' // TODO change location?
     })

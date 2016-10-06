@@ -27,10 +27,13 @@ const BlogAll = createClass({
   },
 
   render () {
+    const {posts} = this.state
+
     return (
       <DefaultLayout classes="page-blogs">
         <div className="blogs-container container">
-          {this.state.posts.map((post, index) => {
+          {!posts && <div className="blog-post row">Loading...</div>}
+          {posts && posts.map((post, index) => {
             return <Post key={index} post={post} hasComments={false} />
           })}
         </div>
