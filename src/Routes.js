@@ -8,8 +8,9 @@ import BlogCreate from './containers/Blog/Create'
 import BlogShow from './containers/Blog/Show'
 import Checkin from './containers/Checkin'
 import CSS from './styles/index.styl'
-import Home from './containers/Home'
 import GoogleMap from './containers/Map'
+import Home from './containers/Home'
+import NotFound from './containers/Errors/404'
 import Photos from './containers/Photos'
 import Resume from './containers/Resume'
 
@@ -24,6 +25,8 @@ const routes = (
       <Route path="photos" component={Photos} />
       <Route path="resume" component={Resume} />
       <Route path="map" component={GoogleMap} />
+      <Route path="*" component={NotFound} />
+      <Route path="not-found" component={NotFound} /> // for redirects
     </Route>
   </Router>
 )
