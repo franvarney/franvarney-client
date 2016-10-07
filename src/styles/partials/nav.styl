@@ -1,24 +1,31 @@
-nav {
-  display: inline-block;
-  position: absolute;
-  right: 0;
-  top: 20px;
-  #link-list {
-    ul {
-      list-style-type: none;
-      li {
-        display: inline-block;
-        margin: 0 15px;
-        a {
-          color: lighten(#551A8B, 30%);
-        }
-      }
-      li:first-child {
-        display: none;
-      }
-      li:last-child {
-        margin-right: 2px;
-      }
-    }
-  }
-}
+nav.navigation
+  background-color $muted
+  bottom 130px
+  left $padding
+  position absolute
+  right $padding
+  > hr
+    margin 0
+    &:first-child
+      margin-bottom 15px
+    &:last-child
+      margin-top 15px
+  ul
+    reset()
+    list-style-type none
+    text-align center
+  li
+    position relative
+    span
+      padding 0 10px
+      position relative
+      z-index 5
+  .link
+    background-color $lightBackground
+    height auto
+  a
+    color $darkPurple
+    font-size 26px
+    font-weight 700
+    text-decoration none
+    text-transform uppercase
