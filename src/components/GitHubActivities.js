@@ -10,7 +10,7 @@ const MARGIN = {
   right: 30,
   top: 35
 }
-
+const MAX = 80
 const MOBILE_MARGIN = {
   bottom: 20,
   left: 25,
@@ -22,7 +22,7 @@ function formatActivities (activities) {
   const data = []
 
   function setTotal(total) {
-    return parseInt(total) > 60 ? 60 : parseInt(total)
+    return parseInt(total) > MAX ? MAX : parseInt(total)
   }
 
   function parseDate (date) {
