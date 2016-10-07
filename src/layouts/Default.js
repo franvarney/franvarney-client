@@ -1,6 +1,7 @@
 import React, {createClass} from 'react'
 
 import Header from '../components/Layout/Header'
+import Navigation from '../components/Layout/Navigation'
 import SocialIcons from '../components/Layout/SocialIcons'
 
 const DefaultLayout = createClass({
@@ -9,6 +10,7 @@ const DefaultLayout = createClass({
       <div className={`${this.props.classes} page row`}>
         <section className="one-fourth column light">
           <Header />
+          <Navigation />
           <SocialIcons />
         </section>
         <section className="three-fourth column white">
