@@ -37,5 +37,9 @@ export const Post = {
   get (slug, done) {
    const request = Superagent.get(`${Config.api.url}/posts/${slug}`)
    return makeRequest(request, done)
+  },
+  getAll (done) {
+   const request = Superagent.get(`${Config.api.url}/posts`)
+   return makeRequest(request, done)
   }
 }
