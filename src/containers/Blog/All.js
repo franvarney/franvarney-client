@@ -1,25 +1,25 @@
 import React, {createClass} from 'react'
 import Request from 'superagent'
 
-import Post from '../../components/Blog/Post'
+import BlogPost from '../../components/Blog/Post'
 import Config from '../../config'
 import DefaultLayout from '../../layouts/Default'
+import {Post} from '../../utils/sdk'
 
 const BlogAll = createClass({
   getInitialState () {
     return {
+      error: null,
       posts: []
     }
   },
 
   getPosts () {
-    Request
-      .get(`${Config.api.url}/posts`)
-      .set('Content-Type', 'application/json')
-      .end((err, res) => {
-        if (err) console.log(err)
-        this.setState({ posts: res.body })
-      })
+    this.setState({ error: null })
+    Post.getAll((err, posts) => {
+      if (err) return this.setState({ error: err })
+      this.setState({ posts })
+    })
   },
 
   componentDidMount () {
@@ -32,9 +32,9 @@ const BlogAll = createClass({
     return (
       <DefaultLayout classes="page-blogs">
         <div className="blogs-container container">
-          {!posts && <div className="blog-post row">Loading...</div>}
+          {!posts || !posts.length && <div className="blog-post row">Loading...</div>}
           {posts && posts.map((post, index) => {
-            return <Post key={index} post={post} hasComments={false} />
+            return <BlogPost key={index} post={post} hasComments={false} />
           })}
         </div>
       </DefaultLayout>
