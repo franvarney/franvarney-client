@@ -4,10 +4,11 @@ import SanitizeHtml from 'sanitize-html'
 import Select, {Creatable} from 'react-select'
 
 import BlogPost from '../../components/Blog/Post'
-import Button from '../../components/Layout/Button'
 import Config from '../../config'
 import DefaultLayout from '../../layouts/Default'
+import Form from '../../components/Form/Wrapper'
 import {Post} from '../../utils/sdk'
+import TextRow from '../../components/Form/Text-Row'
 
 const REQUIRED = [
   'title', 'summary', 'content',
@@ -41,7 +42,10 @@ const BlogCreate = createClass({
     return {
       category: undefined,
       content: undefined,
-      error: undefined,
+      error: {
+        message: undefined,
+        key: undefined
+      },
       height: '75%',
       post: {
         category: DEFAULT_VALUES.category,
@@ -60,21 +64,26 @@ const BlogCreate = createClass({
   validate (data) {
     let invalidKey = null
     const isInvalid = REQUIRED.some((key) => {
-      if (!data.hasOwnProperty(key) || !data[key] ||
+      if (!data.hasOwnProperty(key) ||
+          !data[key] ||
           !data[key].length) return (invalidKey = key, true)
-      if (key === 'category' && data[key] === 'Category') return (invalidKey = key, true)
+      if (DEFAULT_VALUES[key] === data[key]) {
+        return (invalidKey = key, true)
+      }
       return false
     })
-    if (isInvalid) this.setState({ error: `'${invalidKey}' is a required field!` })
+
+    if (invalidKey) {
+      this.state.error.key = invalidKey
+      this.setState(this.state)
+      return false
+    }
+
+    return true
   },
 
-  onTitleChange (event) {
-    this.state.post.title = event.target.value
-    this.setState(this.state)
-  },
-
-  onSummaryChange (event) {
-    this.state.post.summary = event.target.value
+  onChange (key, event) {
+    this.state.post[key] = event.target.value
     this.setState(this.state)
   },
 
@@ -108,24 +117,25 @@ const BlogCreate = createClass({
     this.setState(this.state)
   },
 
-  onSecretChange (event) {
-    this.state.post.secret = event.target.value
-    this.setState(this.state)
-  },
-
   submitPost (event) {
     event.preventDefault()
-    this.setState({ error: null })
+    this.setState({ error: {} })
 
     const post = Object.assign({}, this.state.post)
     delete post.createdAt
 
-    this.validate(post)
-    if (this.state.error) return
+    const isValid = this.validate(post)
+    if (!isValid) {
+      this.state.error.message = `Invalid value for '${this.state.error.key}'!`
+      return this.setState(this.state)
+    }
 
     Post.create(post, (err, created) => {
-      if (err) return this.setState({ error: err })
-      window.location = '/blog' // TODO change location?
+      if (err) {
+        this.state.error.message = err
+        return this.setState(this.state)
+      }
+      return window.location = '/blog' // TODO change location?
     })
   },
 
@@ -138,34 +148,24 @@ const BlogCreate = createClass({
       <DefaultLayout classes="page-blog-create">
         <div id="editor" className="column half">
           <h2>Create A Post</h2>
-          <form onSubmit={this.submitPost}>
-            <div id="title" className="row">
-              <span className="column">
-                <label id="label-title" htmlFor="title">Title</label>
-              </span>
-              <span className="column">
-                <input
-                  autoComplete="off"
-                  id="text-title"
-                  name="title"
-                  type="text"
-                  value={this.state.title}
-                  onChange={this.onTitleChange} />
-              </span>
-            </div>
-            <div id="summary" className="row">
-              <span className="column">
-                <label id="label-summary" htmlFor="summary">Summary</label>
-              </span>
-              <span className="column">
-                <textarea
-                  autoComplete="off"
-                  id="text-summary"
-                  name="summary"
-                  value={this.state.summary}
-                  onChange={this.onSummaryChange} />
-              </span>
-            </div>
+          <Form onSubmit={this.submitPost} error={this.state.error.message}>
+            <TextRow names="Title">
+              <input
+                autoComplete="off"
+                id="text-title"
+                name="title"
+                type="text"
+                value={this.state.title}
+                onChange={this.onChange.bind(this, 'title')} />
+            </TextRow>
+            <TextRow names="summary">
+              <textarea
+                autoComplete="off"
+                id="text-summary"
+                name="summary"
+                value={this.state.summary}
+                onChange={this.onChange.bind(this, 'summary')}  />
+            </TextRow>
             <div id="markup-type" className="row">
               <hr className="divider" />
               <div className="column">
@@ -187,10 +187,7 @@ const BlogCreate = createClass({
               </div>
               <hr className="divider" />
             </div>
-            <div id="content" className="row">
-              <span className="column">
-                <label htmlFor="content" id="label-content">Content</label>
-              </span>
+            <TextRow names="content">
               <DebounceInput
                 debounceTimeout={300}
                 element="textarea"
@@ -200,61 +197,35 @@ const BlogCreate = createClass({
                 style={{ height: this.state.height }}
                 value={this.state.content}
                 onChange={this.onContentChange} />
-            </div>
-            <div className="row">
-              <div id="category" className="column half left">
-                <span className="column">
-                  <label htmlFor="category" id="label-category">Category</label>
-                </span>
-                <span className="column">
-                  <Creatable
-                    clearable={false}
-                    id="select-category"
-                    multi={false}
-                    name="category"
-                    options={DEFAULT_VALUES.categories}
-                    value={this.state.category}
-                    onChange={this.onCategoryChange} />
-                </span>
-              </div>
-              <div id="tags" className="column half right">
-                <span className="column">
-                  <label htmlFor="tags" id="label-tags">Tags</label>
-                </span>
-                <span className="column">
-                  <Creatable
-                    clearable={false}
-                    id="select-tags"
-                    multi={true}
-                    name="tags"
-                    options={DEFAULT_VALUES.tags}
-                    value={this.state.tags}
-                    onChange={this.onTagsChange} />
-                </span>
-              </div>
-            </div>
-            <div id="secret" className="row">
-              <span className="column">
-                <label htmlFor="secret" id="label-secret">Secret</label>
-              </span>
-              <span className="column half left">
-                <input
+            </TextRow>
+            <TextRow names={["Category", "Tags"]}>
+              <Creatable
+                clearable={false}
+                id="select-category"
+                multi={false}
+                name="category"
+                options={DEFAULT_VALUES.categories}
+                value={this.state.category}
+                onChange={this.onCategoryChange} />
+              <Creatable
+                clearable={false}
+                id="select-tags"
+                multi={true}
+                name="tags"
+                options={DEFAULT_VALUES.tags}
+                value={this.state.tags}
+                onChange={this.onTagsChange} />
+            </TextRow>
+            <TextRow names={["Secret"]}>
+              {[<input
+                  key="0"
                   autoComplete="off"
                   id="text-secret"
                   name="secret"
                   type="password"
-                  onChange={this.onSecretChange} />
-              </span>
-            </div>
-            <div id="submit" className="row">
-              <div className="column half error">
-                {this.state.error && <p>ERROR: {this.state.error}</p>}
-              </div>
-              <div className="column half">
-                <Button onSubmit={this.submitPost} />
-              </div>
-            </div>
-          </form>
+                  onChange={this.onChange.bind(this, 'secret')}  />]}
+            </TextRow>
+          </Form>
         </div>
         <div id="output" className="column half">
           <BlogPost
