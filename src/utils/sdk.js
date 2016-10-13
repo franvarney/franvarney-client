@@ -43,3 +43,12 @@ export const Post = {
    return makeRequest(request, done)
   }
 }
+
+export const Place = {
+  getAll (query={}, done) {
+    const request = Superagent.get(`${Config.api.url}/places`)
+    if (query.visitor) request.query({ visitor: query.isVisitor })
+    if (query.condensed) request.query({ condensed: query.condensed })
+    return makeRequest(request, done)
+  }
+}
