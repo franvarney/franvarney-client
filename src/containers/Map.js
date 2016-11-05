@@ -10,6 +10,12 @@ import MarkerDetails from '../components/Map/MarkerDetails'
 import {Place} from '../utils/sdk'
 import Stylers from '../components/Map/stylers'
 
+import SuperCluster from 'points-cluster'
+
+function lngLatString (longitude, latitude) {
+  return `${longitude},${latitude}`
+}
+
 const GoogleMap = createClass({
   getDefaultProps () {
     return {
@@ -20,13 +26,21 @@ const GoogleMap = createClass({
 
   getInitialState () {
     return {
+      bounds: {
+        nw: { lat: 85, lng: -180 },
+        se: { lat: -85, lng: 180 }
+      },
+      currentKey: 'all', // one of all, self, visitors
       error: null,
       places: {
         all: [],
         current: [],
+        lookup: {},
         self: [],
         visitors: []
-      }
+      },
+      points: 1,
+      zoom: this.props.zoom
     }
   },
 
@@ -65,6 +79,12 @@ const GoogleMap = createClass({
     Place.getAll({ condensed: true }, (err, places) => {
       if (err) return this.setState({ error: err }) // TODO what to do with error?
       this.state.places.all = this.state.places.current = places
+      this.state.places.all.forEach((place) => {
+        const lngLat = lngLatString(place.location.longitude, place.location.latitude)
+        if (!this.state.places.lookup[lngLat]) this.state.places.lookup[lngLat] = place
+      })
+      this.setState(this.state)
+      this.state.places.current = this.cluster(this.state.places.current)
       this.setState(this.state)
     })
   },
@@ -75,7 +95,8 @@ const GoogleMap = createClass({
   },
 
   resetPlaces () {
-    this.state.places.current = this.state.places.all
+    this.state.places.current = this.cluster(this.state.places.all)
+    this.state.currentKey = 'all'
     return this.setState(this.state)
   },
 
@@ -83,7 +104,8 @@ const GoogleMap = createClass({
     if (!this.state.places.self.length) {
       this.state.places.self = this.filterPlaces(false)
     }
-    this.state.places.current = this.state.places.self
+    this.state.places.current = this.cluster(this.state.places.self)
+    this.state.currentKey = 'self'
     return this.setState(this.state)
   },
 
@@ -91,8 +113,38 @@ const GoogleMap = createClass({
     if (!this.state.places.visitors.length) {
       this.state.places.visitors = this.filterPlaces(true)
     }
-    this.state.places.current = this.state.places.visitors
+    this.state.places.current = this.cluster(this.state.places.visitors)
+    this.state.currentKey = 'visitors'
     return this.setState(this.state)
+  },
+
+  cluster (places) {
+    let clusters = SuperCluster(places.map((place) => {
+      place.lat = place.location.latitude
+      place.lng = place.location.longitude
+      return place
+    }))
+    clusters = clusters({ bounds: this.state.bounds, zoom: this.state.zoom })
+    clusters = clusters.map((cluster) => {
+      const lngLat = lngLatString(cluster.x, cluster.y)
+      if (cluster.numPoints === 1) cluster = Object.assign(cluster, this.state.places.lookup[lngLat])
+      cluster = Object.assign(cluster, {
+        location: {
+          latitude: cluster.y,
+          longitude: cluster.x
+        }
+      })
+      return Object.assign(cluster, { points: cluster.numPoints })
+    })
+    return clusters
+  },
+
+  onChange (map) {
+    const {bounds, zoom} = map
+    this.state.zoom = map.zoom
+    this.state.bounds = map.bounds
+    this.state.places.current = this.cluster(this.state.places[this.state.currentKey])
+    this.setState(this.state)
   },
 
   componentWillMount () {
@@ -117,9 +169,10 @@ const GoogleMap = createClass({
         <GoogleMapReact
           options={this.createMapOptions}
           defaultCenter={center}
-          defaultZoom={zoom}>
+          defaultZoom={zoom}
+          onChange={this.onChange}>
           {places.current.map((checkin, i) => {
-            const {location, place, visitor} = checkin
+            const {location, place, points, visitor} = checkin
             return (
               <Marker
                 key={i}
@@ -127,6 +180,7 @@ const GoogleMap = createClass({
                 lng={location.longitude}
                 visitor={visitor}
                 place={place}
+                points={points}
                 showMarkerDetail={this.showMarkerDetail} />
             )
           })}
