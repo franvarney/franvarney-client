@@ -33,6 +33,7 @@
     "google-map-react": "0.13.0",
     "html-webpack-plugin": "1.6.2",
     "json-loader": "0.5.2",
+    "points-cluster": "0.1.4",
     "react": "15.3.2",
     "react-bar-chart": "0.1.1",
     "react-d3": "0.4.0",
