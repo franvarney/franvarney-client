@@ -7,7 +7,7 @@
     "clean": "rm -rf public",
     "dev": "npm run clean && NODE_ENV=development webpack-dev-server --progress --hot --inline --history-api-fallback",
     "postinstall": "cp src/config/example.js src/config/production.js && cp src/config/example.js src/config/development.js",
-    "start": "npm run clean && NODE_ENV=production webpack --progress && cp -r sites-enabled public"
+    "start": "npm run clean && NODE_ENV=production webpack --progress"
   },
   "repository": {
     "type": "git",
