@@ -29,6 +29,5 @@ node_modules
 .DS_Store
 .npm-debug.log
 
-public
 src/config/development.js
 src/config/production.js
